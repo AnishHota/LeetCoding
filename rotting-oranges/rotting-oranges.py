@@ -15,7 +15,7 @@ class Solution:
                     freshO +=1
         
         levels=0
-        while queue:
+        while queue and freshO>0:
             levels+=1
             for _ in range(len(queue)):
                 x,y = queue.popleft()
@@ -25,4 +25,4 @@ class Solution:
                         grid[i][j]=2
                         queue.append([i,j])
         
-        return -1 if freshO!=0 else max(levels-1,0)
+        return -1 if freshO!=0 else levels
