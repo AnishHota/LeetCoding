@@ -2,23 +2,26 @@ class Solution:
     def trap(self, height: List[int]) -> int:
 
         n = len(height)
-        pre_max = [0] * n 
-        post_max = [0] * n
 
-        max_curr = height[0]
-        for i in range(n):
-            if height[i]>max_curr:
-                max_curr = height[i]
-            pre_max[i]=max_curr
-        
-        max_curr = height[-1]
-        for i in range(n-1,-1,-1):
-            if height[i]>max_curr:
-                max_curr = height[i]
-            post_max[i]=max_curr
+        l = 1
+        r = n-2
 
-        ans = [0] * n
-        for i in range(n):
-            ans[i] = min(pre_max[i],post_max[i])-height[i]
+        ans=0
+
+        max_l = height[0]
+        max_r = height[-1]
+
+        while l<=r:
+
+            if max_l<=max_r:
+                if max_l<height[l]:
+                    max_l = height[l]
+                ans += max_l-height[l]
+                l+=1
+            else:
+                if max_r<height[r]:
+                    max_r = height[r]
+                ans += max_r-height[r]
+                r-=1
         
-        return sum(ans)
+        return ans
