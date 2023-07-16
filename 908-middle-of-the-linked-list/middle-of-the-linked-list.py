@@ -11,13 +11,8 @@ class Solution:
         if fast is None:
             return slow
         
-        while fast is not None:
-            if fast.next is None:
-                return slow
-            if fast.next.next is None:
-                return slow.next
+        while fast and fast.next:
             slow = slow.next
-            fast = fast.next
-            fast = fast.next
+            fast = fast.next.next
 
         return slow
