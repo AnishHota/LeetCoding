@@ -11,7 +11,6 @@ class Solution:
             return 0
 
         self.maxDiam = 0
-        @cache
         def depth(node):
             if not node:
                 return 0
