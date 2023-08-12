@@ -10,27 +10,20 @@ class Solution:
         if not root:
             return 0
 
+        self.maxDiam = 0
         @cache
         def depth(node):
             if not node:
                 return 0
             
-            return max(depth(node.left),depth(node.right))+1
-        
-        queue = collections.deque()
-        queue.append(root)
-        maxDiam = 0
-        while queue:
-            node = queue.popleft()
-            diam = depth(node.left)+depth(node.right)
-
-            if diam>maxDiam:
-                maxDiam = diam
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
+            left = depth(node.left)
+            right = depth(node.right)
+            if (left+right)>self.maxDiam:
+                self.maxDiam = left+right
             
-        return maxDiam
+            return max(left,right)+1
+        
+        depth(root)
+        return self.maxDiam
             
         
