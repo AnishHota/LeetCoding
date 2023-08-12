@@ -6,21 +6,31 @@
 #         self.right = right
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        # Maximum height in left subtree + maximum height in right subtree for each node.
-        self.diam = 0
-        def height(root):
-            if not root:
+
+        if not root:
+            return 0
+
+        @cache
+        def depth(node):
+            if not node:
                 return 0
-            left = height(root.left)
-            right = height(root.right)
-
-            if (left+right)>self.diam:
-                self.diam = left+right
             
-            return 1+max(left,right)
+            return max(depth(node.left),depth(node.right))+1
+        
+        queue = collections.deque()
+        queue.append(root)
+        maxDiam = 0
+        while queue:
+            node = queue.popleft()
+            diam = depth(node.left)+depth(node.right)
 
-        height(root)
-        return self.diam
-
-        return diam
-
+            if diam>maxDiam:
+                maxDiam = diam
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+            
+        return maxDiam
+            
+        
