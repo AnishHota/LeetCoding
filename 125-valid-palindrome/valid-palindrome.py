@@ -8,8 +8,7 @@ class Solution:
             while j>=0 and not s[j].isalnum():
                 j-=1
             if i<=j and i<len(s) and j>=0:
-                if str(s[i]).lower()!=str(s[j]).lower():
-                    print(s[i],s[j])
+                if s[i].lower()!=s[j].lower():
                     return False
             j-=1
             i+=1
