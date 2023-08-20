@@ -4,7 +4,7 @@ class Solution:
         comb,curr = [],[]
         def btrack(i,n,comb,curr):
             if len(curr)==k:
-                comb.append(curr.copy())
+                comb.append(curr[:])
                 return
             if i>n:
                 return 
