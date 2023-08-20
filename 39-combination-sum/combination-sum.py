@@ -2,17 +2,19 @@ class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         
         comb,curr = [],[]
-        def btrack(i,candidates,comb,curr):
-            if sum(curr)>target:
+        def btrack(i,candidates,comb,curr,target):
+            if target<0:
                 return
-            elif sum(curr)==target and curr not in comb:
+            if target==0:
                 comb.append(curr.copy())
-            if i>=len(candidates):
                 return
-            curr.append(candidates[i])
-            btrack(i,candidates,comb,curr)
-            curr.pop()
-            btrack(i+1,candidates,comb,curr)
-        
-        btrack(0,candidates,comb,curr)
+            if i>len(candidates)-1:
+                return
+            
+            for j in range(i,len(candidates)):
+                curr.append(candidates[j])
+                btrack(j,candidates,comb,curr,target-candidates[j])
+                curr.pop()
+
+        btrack(0,candidates,comb,curr,target)
         return comb
