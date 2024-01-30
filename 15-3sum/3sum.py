@@ -5,6 +5,8 @@ class Solution:
         n = len(nums)
         nums = sorted(nums)
         for i in range(n):
+            if i>0 and nums[i]==nums[i-1]:
+                continue
             l = i+1
             r = n-1
             target = -1*nums[i]
