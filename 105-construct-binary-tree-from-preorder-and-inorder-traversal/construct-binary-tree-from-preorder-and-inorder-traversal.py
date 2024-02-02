@@ -6,13 +6,15 @@
 #         self.right = right
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        preorder.reverse()
+        preorderid = 0
         dic = {e:i for i,e in enumerate(inorder)}
 
         def build(preorder,inorder,beg,end):
+            nonlocal preorderid
             if beg>end:
                 return None
-            node = preorder.pop()
+            node = preorder[preorderid]
+            preorderid+=1
             index = dic[node]
             root = TreeNode(node)
             root.left = build(preorder,inorder,beg,index-1)
