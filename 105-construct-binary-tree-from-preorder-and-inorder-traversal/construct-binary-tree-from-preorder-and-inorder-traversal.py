@@ -7,17 +7,18 @@
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         preorder.reverse()
-        
-        def build(preorder,inorder):
-            if len(inorder)==0:
+        dic = {e:i for i,e in enumerate(inorder)}
+
+        def build(preorder,inorder,beg,end):
+            if beg>end:
                 return None
             node = preorder.pop()
-            index = inorder.index(node)
+            index = dic[node]
             root = TreeNode(node)
-            root.left = build(preorder,inorder[:index])
-            root.right = build(preorder,inorder[index+1:])
+            root.left = build(preorder,inorder,beg,index-1)
+            root.right = build(preorder,inorder,index+1,end)
             return root
 
-        return build(preorder,inorder)
+        return build(preorder,inorder,0,len(inorder)-1)
 
         
