@@ -8,10 +8,8 @@ class Solution:
             ans[freq[x]].append(x)
         
         for x in range(len(ans)-1,-1,-1):
-            if ans[x]:
-                result+=ans[x]
-                k-=len(ans[x])
-            if k<=0:
-                return result[:len(result)+k]
+            for n in ans[x]:
+                result.append(n)
+                if len(result)==k:
+                    return result
         
-        return result
