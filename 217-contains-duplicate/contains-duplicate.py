@@ -4,8 +4,7 @@ class Solution:
         for x in nums:
             if x in s:
                 return True
-            else:
-                s.add(x)
+            s.add(x)
         
         return False
         
