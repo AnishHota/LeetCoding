@@ -1,10 +1,8 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        sfreq = collections.Counter(s)
-        tfreq = collections.Counter(t)
-
-        if sfreq==tfreq:
+        if len(s)!=len(t):
+            return False
+        if Counter(s)==Counter(t):
             return True
-        
         return False
         
