@@ -1,14 +1,12 @@
 class Solution:
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
-        arr = sorted(zip(position,speed),reverse=True)
-        ans = 0
-        flag = 0
-        for x,y in arr:
-            dist = (target-x)/y
+        car = sorted(zip(position,speed),reverse=True)
+        stack = []
 
-            if dist>flag:
-                flag = dist
-                ans+=1
-                
-        return ans
+        for p,s in car:
+            stack.append((target-p)/s)
+            if len(stack)>1 and stack[-1]<=stack[-2]:
+                stack.pop()
+    
+        return len(stack)
         
