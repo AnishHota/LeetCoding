@@ -1,29 +1,16 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-
+        op = {"(":")", "{":"}","[":"]"}
         for x in s:
-            if x in "([{":
+            if x in "({[":
                 stack.append(x)
-            if x in ")]}" and not stack:
+            elif not stack or x!=op[stack[-1]]:
                 return False
-            if x==")":
-                if stack[-1]!="(":
-                    return False
-                else:
-                    stack.pop()
-            if x=="]":
-                if stack[-1]!="[":
-                    return False
-                else:
-                    stack.pop()
-            if x=="}":
-                if stack[-1]!="{":
-                    return False
-                else:
-                    stack.pop()
+            else:
+                stack.pop()
         
         if stack:
             return False
-        
         return True
+        
