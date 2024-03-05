@@ -14,18 +14,16 @@ class TimeMap:
     def get(self, key: str, timestamp: int) -> str:
         if key not in self.timemap.keys():
             return ""
+        ans = ""
         l,r = 0, len(self.timemap[key][0])-1
         while l<=r:
             mid = int(l+(r-l)/2)
-            if timestamp==self.timemap[key][0][mid]:
-                return self.timemap[key][1][mid]
-            elif timestamp>self.timemap[key][0][mid]:
+            if timestamp>=self.timemap[key][0][mid]:
+                ans = self.timemap[key][1][mid]
                 l=mid+1
             else:
                 r=mid-1
-        if r==-1:
-            return ""
-        return self.timemap[key][1][r]
+        return ans
 
 
 
