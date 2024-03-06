@@ -12,11 +12,12 @@ class TimeMap:
 
     def get(self, key: str, timestamp: int) -> str:
         ans = ""
-        l,r = 0, len(self.timemap.get(key,[]))-1
+        values = self.timemap.get(key,[])
+        l,r = 0, len(values)-1
         while l<=r:
             mid = int(l+(r-l)/2)
-            if timestamp>=self.timemap[key][mid][0]:
-                ans = self.timemap[key][mid][1]
+            if timestamp>=values[mid][0]:
+                ans = values[mid][1]
                 l=mid+1
             else:
                 r=mid-1
