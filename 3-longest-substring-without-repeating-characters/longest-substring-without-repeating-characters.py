@@ -10,9 +10,7 @@ class Solution:
                 while l<=ind[s[r]]+1:
                     ind[s[l]]=-1
                     l+=1
-                ind[s[r]]=r
-            else:
-                ind[s[r]]=r
+            ind[s[r]]=r
             r+=1
         
         return max(ans,r-l)
