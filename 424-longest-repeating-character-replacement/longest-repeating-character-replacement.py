@@ -4,14 +4,13 @@ class Solution:
 
         maxF = 0
         ans = 0
-        l,r = 0,0
-        while l<=r and r<len(s):
+        l = 0
+        for r in range(len(s)):
             freq[ord(s[r])-ord('A')]+=1
             maxF = max(maxF,freq[ord(s[r])-ord('A')])
             if (r-l+1)-maxF>k:
                 freq[ord(s[l])-ord('A')]-=1
                 l+=1
             ans = max(r-l+1,ans)
-            r+=1
         return ans
             
