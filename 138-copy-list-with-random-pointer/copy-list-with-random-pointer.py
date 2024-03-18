@@ -9,27 +9,22 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        arr = {}
+        if not head:
+            return head
+        
+        hash = {}
         dummy = head
-        ans = Node(-1)
-        prev = ans
         while dummy:
             curr = Node(dummy.val)
-            arr[dummy] = curr
-            if dummy.random in arr:
-                curr.random = arr[dummy.random]
-            prev.next = curr
-            prev=curr
+            hash[dummy] = curr
             dummy = dummy.next
         
         dummy = head
-        temp = ans.next
         while dummy:
-            if not temp.random and dummy.random in arr:
-                temp.random = arr[dummy.random]
-            temp = temp.next
+            hash[dummy].next = hash.get(dummy.next)
+            hash[dummy].random = hash.get(dummy.random)
             dummy = dummy.next
-        return ans.next
+        return hash[head]
         
 
         
