@@ -17,17 +17,21 @@ class Solution:
         if fast:
             slow = slow.next
         
-        stack = []
+        prev = None
         while slow:
-            stack.append(slow)
+            temp = slow
             slow = slow.next
+            temp.next = prev
+            prev = temp
         
         dummy = head
-        while stack:
-            node = stack.pop()
-            node.next = dummy.next
-            dummy.next = node
-            dummy = dummy.next.next
+        while prev:
+            temp = dummy
+            dummy = dummy.next
+            temp.next = prev
+            prev_temp = prev.next
+            prev.next = dummy
+            prev = prev_temp
 
         dummy.next = None
         
