@@ -5,7 +5,7 @@ class Solution:
         freq = defaultdict(int)
         for r in range(len(nums)):
             freq[nums[r]]+=1
-            while l<=r and freq[nums[r]]>k:
+            while freq[nums[r]]>k:
                 freq[nums[l]]-=1
                 l+=1
             ans = max(ans,r-l+1)
