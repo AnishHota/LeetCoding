@@ -6,7 +6,7 @@ class Solution:
         for r in range(len(nums)):
             if nums[r]==n:
                 cnt+=1
-            while cnt>=k:
+            while cnt==k:
                 cnt -= nums[l]==n
                 l+=1
             ans+=l
