@@ -4,16 +4,14 @@ class Solution:
         ans = 0
         prevMinInd = -1
         prevMaxInd = -1
-        for r in range(len(nums)):
-            if nums[r]<minK or nums[r]>maxK:
+        for r,x in enumerate(nums):
+            if x<minK or x>maxK:
                 l=r
-            if nums[r]==minK:
+            if x==minK:
                 prevMinInd = r
-            if nums[r]==maxK:
+            if x==maxK:
                 prevMaxInd = r
-            
             ans+=max(0,min(prevMinInd,prevMaxInd)-l)
-            print(prevMinInd, prevMaxInd,l,ans )
         
         return ans
 
