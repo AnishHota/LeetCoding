@@ -5,8 +5,7 @@ class Solution:
         for x in s:
             if x=="(":
                 stack+=1
-                if stack>ans:
-                    ans = stack
+                ans = max(ans,stack)
             elif x==")":
                 stack-=1
         return ans
