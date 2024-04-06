@@ -1,19 +1,17 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
         stack = []
-
+        rem_ind = set()
         for i,x in enumerate(s):
             if x=="(":
-                stack.append((x,i))
+                stack.append(i)
             elif x==")":
-                if stack and stack[-1][0]=="(":
+                if stack:
                     stack.pop()
                 else:
-                    stack.append((x,i))
+                    rem_ind.add(i)
         
-        rem_ind = []
-        for x in stack:
-            rem_ind.append(x[1])
+        rem_ind.update(stack)
         ans = ""
         for i,x in enumerate(s):
             if i not in rem_ind:
