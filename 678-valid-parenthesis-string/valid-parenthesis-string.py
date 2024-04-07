@@ -5,6 +5,8 @@ class Solution:
             if x==")":
                 leftMax-=1
                 leftMin-=1
+                if leftMax<0:
+                    return False
             if x=="(":
                 leftMax+=1
                 leftMin+=1
@@ -12,8 +14,5 @@ class Solution:
                 leftMin-=1
                 leftMax+=1
             leftMin = max(0,leftMin)
-            if leftMax<0:
-                return False
-        if leftMin==0:
-            return True
-        return False
+
+        return leftMin==0
