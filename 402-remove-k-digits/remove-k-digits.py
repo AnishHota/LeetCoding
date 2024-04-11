@@ -9,7 +9,9 @@ class Solution:
                     stack.pop()
             stack.append(x)
         
-        stack = stack[:-k] if k!=0 else stack
+        while stack and k!=0:
+            stack.pop()
+            k-=1
 
         stack = ''.join(stack).lstrip('0')
 
