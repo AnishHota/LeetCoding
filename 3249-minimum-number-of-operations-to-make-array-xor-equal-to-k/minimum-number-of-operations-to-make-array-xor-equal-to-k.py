@@ -6,4 +6,4 @@ class Solution:
             xor ^= x 
         
         ans = xor^k
-        return bin(ans).count("1")
+        return ans.bit_count()
