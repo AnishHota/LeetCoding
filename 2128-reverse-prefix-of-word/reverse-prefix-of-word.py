@@ -1,13 +1,9 @@
 class Solution:
     def reversePrefix(self, word: str, ch: str) -> str:
-        ind = -1
 
         for i,w in enumerate(word):
             if w==ch:
-                ind = i
-                break
+                return word[i::-1]+word[i+1:]
+        return word
         
-        if ind==-1:
-            return word
         
-        return word[ind::-1]+word[ind+1:]
