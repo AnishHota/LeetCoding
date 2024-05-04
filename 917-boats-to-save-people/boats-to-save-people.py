@@ -8,12 +8,9 @@ class Solution:
             j-=1
         while i<=j:
             if people[j] < limit and (people[i]+people[j]) <= limit:
-                boats+=1
                 i+=1
-                j-=1
-            else:
-                boats+=1
-                j-=1
+            boats+=1
+            j-=1
         
         return boats
 
