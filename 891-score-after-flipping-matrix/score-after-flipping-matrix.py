@@ -13,7 +13,7 @@ class Solution:
                         grid[i][j]=1
                     elif grid[i][j]==1:
                         grid[i][j]=0
-                        
+
         for j in range(cols):
             count_zeros = 0
             for i in range(rows):
@@ -27,7 +27,6 @@ class Solution:
                     else:
                         grid[i][j]=0
         
-        print(grid)
         ans = 0
         for x in grid:
             str_x = ''.join(list(map(str,x)))
