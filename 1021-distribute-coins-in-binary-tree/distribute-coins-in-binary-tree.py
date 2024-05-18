@@ -7,22 +7,17 @@
 class Solution:
     def distributeCoins(self, root: Optional[TreeNode]) -> int:
         
-        res = 0
+        self.res = 0
 
-        def dfs(node, size, coins):
-            nonlocal res
+        def dfs(node):
             if not node:
-                return 0,0
-            
-            if not node.left and not node.right:
-                return (1,node.val)
-            
-            x,y = dfs(node.left,size,coins)
-            a,b = dfs(node.right,size,coins)
-            res += abs(y-x) + abs(b-a)
-            size += x+a
-            coins += b+y+node.val-1
-            return (size,coins)
+                return 0
+
+            l_extra = dfs(node.left)
+            r_extra = dfs(node.right)
+            extra = node.val + l_extra + r_extra - 1
+            self.res += abs(extra)
+            return extra
         
-        dfs(root,0,0)
-        return res
+        dfs(root)
+        return self.res
