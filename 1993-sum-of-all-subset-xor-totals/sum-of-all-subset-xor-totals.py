@@ -1,17 +1,26 @@
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
-        def subsets(ind,xor):
-
-            if ind>=len(nums):
-                return xor
-            
-            a = subsets(ind+1,xor^nums[ind])
-            b = subsets(ind+1,xor)
-            return a+b
         
-        return subsets(0,0)
+        OR = nums[0]
+        for i in range(1,len(nums)):
+            OR |= nums[i]
+        
+        return OR*(1<<(len(nums)-1))
 
-        # Backtracking: Subsets
+
+        # Solution-2: Backtracking with/without including
+        # def subsets(ind,xor):
+
+        #     if ind>=len(nums):
+        #         return xor
+            
+        #     a = subsets(ind+1,xor^nums[ind])
+        #     b = subsets(ind+1,xor)
+        #     return a+b
+        
+        # return subsets(0,0)
+
+        # Solution-1: Backtracking: Subsets
         # self.ans = 0
         # self.res = []
         # def subsets(index, subset):
