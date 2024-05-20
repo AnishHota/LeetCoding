@@ -1,21 +1,33 @@
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
-        self.ans = 0
-        self.res = []
-        def subsets(index, subset):
-            temp_xor = subset[0] if subset else 0
-            for i in range(1,len(subset)):
-                temp_xor ^= subset[i]
-            self.ans += temp_xor
-            self.res.append(subset.copy())
-            for i in range(index,len(nums)):
-                subset.append(nums[i])
-                subsets(i+1,subset)
-                subset.pop()
+        def subsets(ind,xor):
+
+            if ind>=len(nums):
+                return xor
             
-            return self.res
+            a = subsets(ind+1,xor^nums[ind])
+            b = subsets(ind+1,xor)
+            return a+b
+        
+        return subsets(0,0)
+
+        # Backtracking: Subsets
+        # self.ans = 0
+        # self.res = []
+        # def subsets(index, subset):
+        #     temp_xor = subset[0] if subset else 0
+        #     for i in range(1,len(subset)):
+        #         temp_xor ^= subset[i]
+        #     self.ans += temp_xor
+        #     self.res.append(subset.copy())
+        #     for i in range(index,len(nums)):
+        #         subset.append(nums[i])
+        #         subsets(i+1,subset)
+        #         subset.pop()
+            
+        #     return self.res
             
         
-        subsets(0,[])
-        print(self.res)
-        return self.ans
+        # subsets(0,[])
+        # print(self.res)
+        # return self.ans
