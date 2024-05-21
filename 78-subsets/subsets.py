@@ -4,12 +4,14 @@ class Solution:
         self.res = []
         
         def sub(index, subs):
-            self.res.append(subs.copy())
-
-            for i in range(index,len(nums)):
-                subs.append(nums[i])
-                sub(i+1,subs)
-                subs.pop()
+            if index>=len(nums):
+                self.res.append(subs.copy())
+                return
+            subs.append(nums[index])
+            sub(index+1,subs)
+            subs.pop()
+            sub(index+1,subs)
+            return subs
 
         sub(0,[])
         return self.res
