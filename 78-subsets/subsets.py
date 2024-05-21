@@ -1,18 +1,15 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        def helper(i,nums,subset,currset):
-            if i>=len(nums):
-                subset.append(currset.copy())
-                return
-            
-            currset.append(nums[i])
-            helper(i+1,nums,subset,currset)
-            currset.pop()
-            helper(i+1,nums,subset,currset)
-            
-        subset, currset = [],[]
-        helper(0,nums,subset,currset)
-        return subset
+        
+        self.res = []
+        
+        def sub(index, subs):
+            self.res.append(subs.copy())
 
-        
-        
+            for i in range(index,len(nums)):
+                subs.append(nums[i])
+                sub(i+1,subs)
+                subs.pop()
+
+        sub(0,[])
+        return self.res
