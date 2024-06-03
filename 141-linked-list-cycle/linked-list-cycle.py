@@ -6,13 +6,11 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        if head and head.next:
-            p = head
-            q = head.next
-        else:
+        if not head:
             return False
+        p,q = head, head.next
 
-        while q!=None:
+        while q:
             if p==q:
                 return True
             p = p.next
@@ -20,4 +18,5 @@ class Solution:
                 q = q.next.next
             else:
                 return False
+        
         return False
