@@ -5,8 +5,8 @@ class Solution:
         for i in range(len(s)):
             if s[i]==t[t_ind]:
                 t_ind+=1
-            if t_ind==len(t):
-                return 0
+                if t_ind==len(t):
+                    return 0
         
         return len(t)-t_ind
 
