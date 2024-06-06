@@ -15,9 +15,8 @@ class Solution:
                 while j!=groupSize:
                     if (k+j) not in freq or freq[k+j]==0:
                         return False
+                    freq[k+j]-=1
                     j+=1
-                for j in range(k,k+groupSize):
-                    freq[j]-=1
         
         return True
 
