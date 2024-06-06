@@ -9,7 +9,6 @@ class Solution:
             freq[x]+=1
         
         freq = dict(sorted(freq.items(), key=lambda x:x[0]))
-        print(freq)
         for k in freq.keys():
             while freq[k]!=0:
                 j=0
