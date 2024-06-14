@@ -1,0 +1,25 @@
+class Solution:
+    def minIncrementForUnique(self, nums: List[int]) -> int:
+        # seen = set()
+        # ans = 0
+        # for i,x in enumerate(nums):
+        #     if x in seen:
+        #         temp = x
+        #         while temp in seen:
+        #             temp+=1
+        #         ans += temp-x
+        #         seen.add(temp)
+        #     else:
+        #         seen.add(x)
+        
+        # return ans
+
+        nums.sort()
+        ans = 0
+        for i,x in enumerate(nums):
+            if i==0:
+                continue
+            if x<=nums[i-1]:
+                ans += nums[i-1]+1-x
+                nums[i]=nums[i-1]+1
+        return ans
