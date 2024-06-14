@@ -27,7 +27,7 @@ class Solution:
         freq = Counter(nums)
         ans = 0
 
-        for i in range(0,max(nums)+len(nums)):
+        for i in range(min(nums),max(nums)+len(nums)):
             if i in freq and freq[i]>1:
                 ans+=freq[i]-1
                 freq[i+1] += freq[i]-1
