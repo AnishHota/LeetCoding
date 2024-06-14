@@ -14,12 +14,23 @@ class Solution:
         
         # return ans
 
-        nums.sort()
+        # nums.sort()
+        # ans = 0
+        # for i,x in enumerate(nums):
+        #     if i==0:
+        #         continue
+        #     if x<=nums[i-1]:
+        #         ans += nums[i-1]+1-x
+        #         nums[i]=nums[i-1]+1
+        # return ans
+
+        freq = Counter(nums)
         ans = 0
-        for i,x in enumerate(nums):
-            if i==0:
-                continue
-            if x<=nums[i-1]:
-                ans += nums[i-1]+1-x
-                nums[i]=nums[i-1]+1
+
+        for i in range(0,max(nums)+len(nums)):
+            if i in freq and freq[i]>1:
+                ans+=freq[i]-1
+                freq[i+1] += freq[i]-1
+                freq[i]=1
+        
         return ans
