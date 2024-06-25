@@ -7,27 +7,38 @@
 class Solution:
     def bstToGst(self, root: TreeNode) -> TreeNode:
         
-        self.inOrder = []
+        # self.inOrder = []
 
-        def iotrav(node):
+        # def iotrav(node):
+        #     if node:
+        #         iotrav(node.left)
+        #         self.inOrder.append(node.val)
+        #         iotrav(node.right)
+        
+        # iotrav(root)
+        # postSum = [0]*len(self.inOrder)
+        # postSum[-1]=self.inOrder[-1]
+        # for i in range(len(self.inOrder)-2,-1,-1):
+        #     postSum[i] = postSum[i+1]+self.inOrder[i]
+        
+        # self.i = 0
+        # def change(node):
+        #     if node:
+        #         change(node.left)
+        #         node.val = postSum[self.i]
+        #         self.i+=1
+        #         change(node.right)
+        
+        # change(root)
+        # return root
+
+        self.curr_sum = 0
+        def reverseInOrder(node):
             if node:
-                iotrav(node.left)
-                self.inOrder.append(node.val)
-                iotrav(node.right)
+                reverseInOrder(node.right)
+                self.curr_sum+=node.val
+                node.val = self.curr_sum
+                reverseInOrder(node.left)
         
-        iotrav(root)
-        postSum = [0]*len(self.inOrder)
-        postSum[-1]=self.inOrder[-1]
-        for i in range(len(self.inOrder)-2,-1,-1):
-            postSum[i] = postSum[i+1]+self.inOrder[i]
-        
-        self.i = 0
-        def change(node):
-            if node:
-                change(node.left)
-                node.val = postSum[self.i]
-                self.i+=1
-                change(node.right)
-        
-        change(root)
+        reverseInOrder(root)
         return root
