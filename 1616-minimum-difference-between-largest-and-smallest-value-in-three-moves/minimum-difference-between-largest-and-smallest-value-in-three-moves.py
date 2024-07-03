@@ -3,22 +3,12 @@ class Solution:
         if len(nums)<=4:
             return 0
         
-        minH = []
-        maxH = []
-
-        for x in nums:
-            heapq.heappush(minH,x)
-            heapq.heappush(maxH,-x)
-
+        minH = sorted(heapq.nsmallest(4,nums))
+        maxH = sorted(heapq.nlargest(4,nums))
         ans = float('inf')
-        temp_max = []
         for i in range(4):
-            temp_max.append(-1*heapq.heappop(maxH))
-        temp_max.sort()
-
-        for i in range(4):
-            x = heapq.heappop(minH)
-            y = temp_max[i]
+            x = minH[i]
+            y = maxH[i]
             ans = min(ans,abs(x-y))
 
         return ans
