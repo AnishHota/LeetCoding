@@ -18,11 +18,9 @@ class Solution:
         while r:
             if q.val<p.val and q.val<r.val:
                 cpoints.append(i)
-                if len(cpoints)>=2:
-                    ans[0] = min(ans[0],cpoints[-1]-cpoints[-2])
             elif q.val>p.val and q.val>r.val:
                 cpoints.append(i)
-                if len(cpoints)>=2:
+            if len(cpoints)>=2:
                     ans[0] = min(ans[0],cpoints[-1]-cpoints[-2])
             i+=1
             p = p.next
