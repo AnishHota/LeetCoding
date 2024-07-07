@@ -15,6 +15,4 @@ class Solution:
                 inorder(node.right)
         
         inorder(root)
-        heap = heapq.nsmallest(k,self.ino)
-        heap = heapq.nlargest(1,heap)
-        return heapq.heappop(heap)
+        return self.ino[k-1]
