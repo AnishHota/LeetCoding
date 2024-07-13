@@ -2,7 +2,6 @@ class Solution:
     def survivedRobotsHealths(self, positions: List[int], healths: List[int], directions: str) -> List[int]:
         ans = []
         phd = sorted(zip(positions,healths,directions))
-        print(phd)
         stack = []
         for p,h,d in phd:
             if d=='L' and stack:
@@ -24,7 +23,6 @@ class Solution:
             else:
                 stack.append([p,h,d])
 
-        print(stack)
         order_dict = {value: index for index, value in enumerate(positions)}
         sorted_arr = sorted(stack, key=lambda x: order_dict[x[0]])
         ans = [x[1] for x in sorted_arr]
