@@ -30,14 +30,13 @@ class LRUCache:
         node.prev = prevn
         node.next = self.tail
         self.tail.prev = node
+        self.has[node.key] = node
 
     def get(self, key: int) -> int:
         if key in self.has:
             value = self.has[key].val
-            curr = LinkedList(key,value)
             self.deleteNode(self.has[key])
-            self.has[key]=curr
-            self.addNode(curr)
+            self.addNode(LinkedList(key,value))
             return value
             
         return -1
@@ -45,14 +44,11 @@ class LRUCache:
     def put(self, key: int, value: int) -> None:
         if key in self.has:
             self.deleteNode(self.has[key])
-            self.has[key] = LinkedList(key,value)
-            self.addNode(self.has[key])
-        else:
-            if len(self.has)==self.capacity:
-                self.deleteNode(self.head.next)
+        self.addNode(LinkedList(key,value))
+        if len(self.has)>self.capacity:
+            self.deleteNode(self.head.next)
             
-            self.has[key] = LinkedList(key,value)
-            self.addNode(self.has[key])
+
                 
 
 # Your LRUCache object will be instantiated and called as such:
