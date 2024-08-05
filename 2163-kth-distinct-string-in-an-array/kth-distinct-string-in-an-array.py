@@ -2,7 +2,6 @@ class Solution:
     def kthDistinct(self, arr: List[str], k: int) -> str:
         freq = Counter(arr)
         freq = sorted(freq.items(),key=lambda x: x[1])
-        print(freq)
         if k>len(freq):
             return ""
         if freq[k-1][1]==1:
