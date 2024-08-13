@@ -7,14 +7,12 @@ class Solution:
             if curr==target:
                 self.ans.append(path[::])
                 return
-            if i>=len(arr) or curr>target:
+            if curr>target:
                 return
-            backtrack(path + [arr[i]],curr+arr[i],i+1)
-            while i+1<len(arr) and (arr[i+1]==arr[i]):
-                i+=1
-            if i<len(arr):
-                backtrack(path,curr,i+1)
-            return
+            for j in range(i,len(arr)):
+                if j>i and arr[j]==arr[j-1]:
+                    continue
+                backtrack(path+[arr[j]],curr+arr[j],j+1)
         
         backtrack([],0,0)
         return self.ans
