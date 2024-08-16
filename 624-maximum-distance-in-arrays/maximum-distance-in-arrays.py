@@ -4,7 +4,7 @@ class Solution:
         diff = 0
         for i,x in enumerate(arrays):
             if i!=0:
-                diff = max(diff, max(abs(minNow-x[-1]),abs(maxNow-x[0])))
+                diff = max(diff, max(x[-1]-minNow,maxNow-x[0]))
                 minNow = min(minNow,x[0])
                 maxNow = max(maxNow,x[-1])
         
