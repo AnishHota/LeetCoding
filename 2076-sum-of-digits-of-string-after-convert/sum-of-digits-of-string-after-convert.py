@@ -5,13 +5,10 @@ class Solution:
         for x in s:
             ins += str(ord(x)-ord('a')+1)
         
-        ins = int(ins)
-        while k>0:
-            k-=1
+        for _ in range(k):
             ans = 0
-            while ins>0:
-                ans += ins%10
-                ins = ins//10
-            ins = ans
+            for d in ins:
+                ans += int(d)
+            ins = str(ans)
         
         return ans
