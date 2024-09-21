@@ -12,6 +12,8 @@ class Solution:
                 if temp<=n:
                     self.ans.append(temp)
                     dfs(temp)
+                else:
+                    return
             
             return
         
