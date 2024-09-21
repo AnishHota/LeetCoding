@@ -1,20 +1,15 @@
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
         
-        self.ans = []
-
-        def dfs(i):
-            if i>n:
-                return
-            self.ans.append(i)
-            for x in range(10):
-                temp = i*10+x
-                dfs(temp)
-            
-            return
+        ans = []
+        num = 1
+        for _ in range(n):
+            ans.append(num)
+            if num*10<=n:
+                num = num*10
+            else:
+                while num%10==9 or num+1>n:
+                    num = num//10
+                num+=1
         
-        end = min(n+1,10)
-        for i in range(1,end):
-            # self.ans.append(i)
-            dfs(i)
-        return self.ans
+        return ans
