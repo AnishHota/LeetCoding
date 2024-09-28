@@ -2,49 +2,41 @@ class MyCircularDeque:
 
     def __init__(self, k: int):
         self.arr = [-1]*k
-        self.head = -1
+        self.head = 0
         self.tail = -1
+        self.maxSize = k
+        self.size = 0
 
     def insertFront(self, value: int) -> bool:
         if self.isFull():
             return False
-        self.arr.insert(0,value)
-        self.arr.pop()
-        if self.head==-1:
-            self.head = 0
-        self.tail+=1
+        self.head = (self.head-1)%self.maxSize
+        self.arr[self.head]=value
+        self.size+=1
         return True
 
 
     def insertLast(self, value: int) -> bool:
         if self.isFull():
             return False
-        if self.isEmpty():
-            self.arr[0]=value
-            self.head=self.tail=0
-        else:
-            self.arr[self.tail+1]=value
-            self.tail+=1
+
+        self.tail = (self.tail+1)%self.maxSize
+        self.arr[self.tail]=value
+        self.size+=1
         return True
 
     def deleteFront(self) -> bool:
         if self.isEmpty():
             return False
-        del self.arr[0]
-        self.arr.append(-1)
-        if self.arr[0]==-1:
-            self.head=-1
-        self.tail-=1
+        self.head = (self.head+1)%self.maxSize
+        self.size-=1
         return True
 
     def deleteLast(self) -> bool:
         if self.isEmpty():
             return False
-        self.arr[self.tail]=-1
-        if self.head==self.tail:
-            self.head=self.tail=-1
-        else:
-            self.tail-=1
+        self.tail = (self.tail-1)%self.maxSize
+        self.size-=1
         return True
 
     def getFront(self) -> int:
@@ -58,14 +50,10 @@ class MyCircularDeque:
         return self.arr[self.tail]
 
     def isEmpty(self) -> bool:
-        if self.head==-1:
-            return True
-        return False
+        return self.size==0
 
     def isFull(self) -> bool:
-        if self.tail!=-1 and self.head!=-1 and self.tail-self.head+1==len(self.arr):
-            return True
-        return False
+        return self.size==self.maxSize
 
 
 # Your MyCircularDeque object will be instantiated and called as such:
