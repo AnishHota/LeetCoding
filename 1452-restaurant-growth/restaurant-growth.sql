@@ -1,14 +1,11 @@
 # Write your MySQL query statement below
-SELECT visited_on,amount,average_amount
+SELECT visited_on,amount,ROUND(amount/7,2) AS average_amount
 FROM
 (SELECT visited_on,
 SUM(amount) OVER(ORDER BY visited_on RANGE BETWEEN INTERVAL 6 DAY PRECEDING AND CURRENT ROW) AS amount,
-ROUND(SUM(amount) OVER(ORDER BY visited_on RANGE BETWEEN INTERVAL 6 DAY PRECEDING AND CURRENT ROW) / 7,2) AS average_amount
+DENSE_RANK() OVER (ORDER BY visited_on) AS ROW_NUM
 FROM 
 Customer) A
-WHERE visited_on >= (
-    SELECT DATE_ADD(MIN(visited_on),INTERVAL 6 DAY)
-    FROM Customer
-)
+WHERE ROW_NUM > 6
 GROUP BY visited_on
 ORDER BY visited_on
