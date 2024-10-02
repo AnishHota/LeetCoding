@@ -1,16 +1,13 @@
 class Solution:
     def arrayRankTransform(self, arr: List[int]) -> List[int]:
-        ind = defaultdict(list)
         
-        for i,x in enumerate(arr):
-            ind[x].append(i)
-
-        ind = dict(sorted(ind.items(),key=lambda x: x[0]))
-        count=1
-        for k,v in ind.items():
-            for i in v:
-                arr[i]=count
-            count+=1
+        ind = {}
+        x = sorted(set(arr))
+        for i,c in enumerate(x):
+            ind[c]=i+1
+        
+        for i,a in enumerate(arr):
+            arr[i] = ind[a]
         
         return arr
         
