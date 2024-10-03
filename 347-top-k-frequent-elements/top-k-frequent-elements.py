@@ -1,15 +1,14 @@
-from collections import Counter
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        ans = [[] for _ in range(len(nums)+1)]
-        freq = Counter(nums)
-        result = []
-        for x in freq:
-            ans[freq[x]].append(x)
-        
-        for x in range(len(ans)-1,-1,-1):
-            for n in ans[x]:
-                result.append(n)
-                if len(result)==k:
-                    return result
-        
+        heap = []
+        freq= Counter(nums)
+        for x,f in freq.items():
+            heapq.heappush(heap,(f,x))
+            if len(heap)==k+1:
+                heapq.heappop(heap)
+
+        res = []
+        while heap:
+            res.append(heapq.heappop(heap)[1])
+
+        return res
