@@ -1,25 +1,36 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        sdict = collections.defaultdict(int)
-        for x in s1:
-            sdict[x]+=1
+        if len(s1)>len(s2):
+            return False
+        if len(s1)==len(s2):
+            return Counter(s1)==Counter(s2)
         
-        bdict = collections.defaultdict(int)
-        count=0
-        l,r = 0,0
-        while r<len(s2):
-            while r<len(s2) and (r-l)!=len(s1):
-                bdict[s2[r]]+=1
-                if s2[r] in sdict and bdict[s2[r]]<=sdict[s2[r]]:
-                    count+=1
-                r+=1
-            if count==len(s1):
-                    return True
-            if s2[l] in sdict and bdict[s2[l]]<=sdict[s2[l]]:
-                count-=1
-            bdict[s2[l]]-=1
-            l+=1
-            
+        freq = Counter(s1)
+        cnt = 0
+        tot = len(freq)
+        n = len(s1)
+
+        for j in range(len(s2)):
+            if s2[j] in freq:
+                if freq[s2[j]]==0:
+                    cnt-=1
+                
+                freq[s2[j]]-=1
+
+                if freq[s2[j]]==0:
+                    cnt+=1
+                
+
+            if j>=n and s2[j-n] in freq:
+                if freq[s2[j-n]]==0:
+                    cnt-=1
+
+                freq[s2[j-n]]+=1
+                
+                if freq[s2[j-n]]==0:
+                    cnt+=1
+
+            if cnt==tot:
+                return True  
+
         return False
-            
-            
