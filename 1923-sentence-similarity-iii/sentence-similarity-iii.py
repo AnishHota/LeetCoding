@@ -3,19 +3,17 @@ class Solution:
         s1 = sentence1.split(" ")
         s2 = sentence2.split(" ")
 
-        prefix1 = deque(s1)
-        prefix2 = deque(s2)
-        
-        while prefix1 and prefix2:
-            if prefix1[0]==prefix2[0]:
-                prefix1.popleft()
-                prefix2.popleft()
-            elif prefix1 and prefix2 and prefix1[-1]==prefix2[-1]:
-                prefix1.pop()
-                prefix2.pop()
+        j1,j2 = len(s1)-1, len(s2)-1
+        i=0
+        while i<len(s1) and i<len(s2):
+            if s1[i]==s2[i]:
+                i += 1
+            elif s1[j1]==s2[j2]:
+                j1-=1
+                j2-=1
             else:
                 break
 
-        if not prefix1 or not prefix2:
+        if i>j1 or i>j2:
             return True
         return False
