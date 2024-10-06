@@ -6,14 +6,16 @@ class Solution:
         prefix1 = deque(s1)
         prefix2 = deque(s2)
         
-        while prefix1 and prefix2 and prefix1[0]==prefix2[0]:
-            prefix1.popleft()
-            prefix2.popleft()
-        
-        while prefix1 and prefix2 and prefix1[-1]==prefix2[-1]:
-            prefix1.pop()
-            prefix2.pop()
-        
+        while prefix1 and prefix2:
+            if prefix1[0]==prefix2[0]:
+                prefix1.popleft()
+                prefix2.popleft()
+            elif prefix1 and prefix2 and prefix1[-1]==prefix2[-1]:
+                prefix1.pop()
+                prefix2.pop()
+            else:
+                break
+
         if not prefix1 or not prefix2:
             return True
         return False
