@@ -1,27 +1,11 @@
 class Solution:
     def minSwaps(self, s: str) -> int:
-        cnto=0
-        cntc=0
-        j = len(s)-1
-        while j>=0 and s[j]!='[':
-            j-=1
-        res=0
-        if not s:
-            return res
-        if j<len(s)//2:
-            return res
+        unmatched = 0
 
-        for i,x in enumerate(s):
+        for x in s:
             if x=='[':
-                cnto+=1
-            elif x==']':
-                cntc+=1
-            if cntc>cnto and i<j:
-                    cntc-=1
-                    cnto+=1
-                    res+=1
-                    j-=1
-                    while j>=0 and s[j]!='[':
-                        j-=1
+                unmatched +=1
+            elif unmatched>0:
+                unmatched -= 1
 
-        return res
+        return (unmatched+1)//2
