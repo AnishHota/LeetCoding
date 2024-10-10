@@ -9,10 +9,9 @@ class Solution:
             while a<=b:
                 mid = (a+b)//2
                 if potions[mid]*x >= success:
-                    ans = max(ans,len(potions)-mid)
                     b = mid-1
                 else:
                     a = mid+1
-            res.append(ans)
+            res.append(len(potions)-a)
         
         return res
