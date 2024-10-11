@@ -3,7 +3,6 @@ class Solution:
         target = times[targetFriend]
 
         times = sorted(times, key=lambda x: x[0])
-        print(times)
         chairs = 0
         heap = []
         chheap = []
