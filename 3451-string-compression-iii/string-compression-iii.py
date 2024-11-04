@@ -1,28 +1,21 @@
 class Solution:
     def compressedString(self, word: str) -> str:
         
-        count = None
-        ch = None
-        prev = None
+        count = 1
+        ch = word[0]
         comp = ""
-        for x in word:
-            if not prev:
-                ch = x
-                count = 1
-                prev = ch
-            elif x==prev and count+1==9:
-                comp += "9"+x
-                count = 0
-                prev = None
-            elif x==prev:
+        for x in word[1:]:
+            if x==ch:
                 count+=1
+                if count==10:
+                    comp+="9"+ch
+                    count = 1
             else:
                 comp += str(count)+ch
-                ch = x
-                prev = ch
                 count = 1
-        if count!=0:
-            comp += str(count)+x
+                ch = x
+
+        comp += str(count)+ch
         return comp
 
 
