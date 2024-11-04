@@ -2,20 +2,22 @@ class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
 
         ans = []
-        def helper(ind,curr):
-            if sum(curr)==target:
+        curr = []
+        def helper(ind,rem):
+            if rem==0:
                 ans.append(curr.copy())
                 return
+            if rem<0:
+                return
             
-            if sum(curr)>target:
-                return
-            if ind>=len(candidates):
-                return
-            curr.append(candidates[ind])
-            helper(ind,curr)
-            curr.pop()
-            helper(ind+1,curr)
+            for i in range(ind,len(candidates)):
+                if candidates[i]>rem:
+                    continue
+                curr.append(candidates[i])
+                helper(i,rem-candidates[i])
+                curr.pop()
+
         
-        helper(0,[])
+        helper(0,target)
         return ans
         
