@@ -1,20 +1,21 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        
-        comb,curr = [],[]
-        def btrack(i,candidates,comb,curr,target):
-            if target<0:
-                return
-            if target==0:
-                comb.append(curr.copy())
-                return
-            if i>len(candidates)-1:
+
+        ans = []
+        def helper(ind,curr):
+            if sum(curr)==target:
+                ans.append(curr.copy())
                 return
             
-            for j in range(i,len(candidates)):
-                curr.append(candidates[j])
-                btrack(j,candidates,comb,curr,target-candidates[j])
-                curr.pop()
-
-        btrack(0,candidates,comb,curr,target)
-        return comb
+            if sum(curr)>target:
+                return
+            if ind>=len(candidates):
+                return
+            curr.append(candidates[ind])
+            helper(ind,curr)
+            curr.pop()
+            helper(ind+1,curr)
+        
+        helper(0,[])
+        return ans
+        
