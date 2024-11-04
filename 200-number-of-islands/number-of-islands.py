@@ -1,25 +1,24 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         
-        r,c = len(grid), len(grid[0])
+        self.r, self.c = len(grid), len(grid[0])
+        def helper(i,j):
+            if grid[i][j]=="0":
+                return
+            
+            grid[i][j]="#"
 
-        def dfs(grid,i,j):
-            di = [[0,1],[1,0],[0,-1],[-1,0]]
-            q = deque()
-            q.append([i,j])
+            d = [(0,1),(1,0),(0,-1),(-1,0)]
 
-            while q:
-                a,b = q.popleft()
-                for x,y in di:
-                    if (a+x>=0 and a+x<r) and (b+y>=0 and b+y<c) and (grid[a+x][b+y]=="1"):
-                        grid[a+x][b+y]="0"
-                        q.append([a+x,b+y])
-
+            for x,y in d:
+                if 0<=i+x<self.r and 0<=j+y<self.c and grid[i+x][y+j]!="#":
+                    helper(i+x,j+y)
+        
         ans = 0
-        for i in range(r):
-            for j in range(c):
+        for i in range(self.r):
+            for j in range(self.c):
                 if grid[i][j]=="1":
-                    ans +=1
-                    dfs(grid,i,j)
+                    ans+=1
+                    helper(i,j)
         
         return ans
