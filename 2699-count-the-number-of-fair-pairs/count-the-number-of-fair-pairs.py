@@ -9,6 +9,8 @@ class Solution:
             for i in range(len(nums)):
                 while i<j and nums[i]+nums[j]>val:
                     j-=1
+                if i==j:
+                    break
                 cnt += max(0,j-i)
             return cnt
         
